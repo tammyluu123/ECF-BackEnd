@@ -8,24 +8,15 @@ public class IHMConsole {
     }
     private void menu(){
         System.out.println("################ Menu ###################");
-        System.out.println(" 1. Ajouter un produit");
-        System.out.println(" 2. Afficher les informations d'un produit");
-        System.out.println(" 3. Supprimer un produit");
-        System.out.println(" 4. Modifier les informations du produit");
-        System.out.println(" 5. Afficher la totalité des produits");
-        System.out.println(" 6. Afficher les produits dont le prix est supérieur au montant précisé");
-        System.out.println(" 7. Afficher les produits achetés entre deux dates");
-        System.out.println(" 8. Afficher les produits dont le stock est inférieur au montant précisé");
-        System.out.println(" 9. Afficher la valeur du stock d'une marque");
-        System.out.println("10. Afficher le prix moyen des produits");
-        System.out.println("11. Afficher la liste des produits d'une marque choisie");
-        System.out.println("12. Supprimer les produits d'une marque choisie");
-        System.out.println("13. Ajouter une image à un produit ");
-        System.out.println("14. Ajouter un commentaire à un produit. ");
-        System.out.println("15. Afficher les produits avec une note de 4 ou plus ");
-        System.out.println("16. Ajouter une commande avec un ou plusieurs produits. ");
-        System.out.println("17. Afficher la totalité des commandes. ");
-        System.out.println("18. Afficher uniquement les commandes du jour. ");
+        System.out.println(" 1. Afficher la liste des classes (sans les eleves).");
+        System.out.println(" 2. Afficher le nombre de matière d'un élève");
+        System.out.println(" 3. Afficher la liste des notes d'un eleve (avec les détails)");
+        System.out.println(" 4. Aficher la moyenne d'un eleve");
+        System.out.println(" 5. Afficher le nombre d'eleve d'un département.");
+        System.out.println(" 6. Afficher tous les noms des eleves d'un niveau.");
+        System.out.println(" 7. Suppression d'un eleve, supprimera sa note mais pas sa classe");
+        System.out.println(" 8. Suppression classe => supprime uniquement les éléves de cette classe");
+        System.out.println(" 9. Suppression d'un departement => Supprime toutes les classes et tous les professeurs");
         System.out.println(" 0. Quitter l'application");
         System.out.println("################ ************ ###################");
         System.out.print("Choix : ");
@@ -38,53 +29,66 @@ public class IHMConsole {
             choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-
+                    showListOfClass();
                     break;
                 case "2":
-
+                    showStudentSubjects();
                     break;
                 case "3":
-
+                    viewStudentScoreDetail();
                     break;
                 case "4":
-
+                    showGPA();
                     break;
                 case "5":
-
+                    showStudentsByDepartement();
                     break;
                 case "6":
-
+                    showAllStudentByLevel();
                     break;
                 case "7":
-
+                    deletAllScoreByStudent();
                     break;
                 case "8":
-
+                    deleteAllStudentsByClass();
                     break;
                 case "9":
-
+                    deleteAllClassByDepartement();
                     break;
-                case "10":
 
-                    break;
-                case "11":
-
-                    break;
-                case "12":
-
-                    break;
-                case "13":
-
-                    break;
-                case "14":
-
-                    break;
                 default:
                     System.out.println("choix invalide !");
 
             }
         }while(!choice.equals("0"));
         //???.end();  sessionFactory.close() dans service
+    }
+
+    private void deleteAllClassByDepartement() {
+    }
+
+    private void deleteAllStudentsByClass() {
+    }
+
+    private void deletAllScoreByStudent() {
+    }
+
+    private void showAllStudentByLevel() {
+    }
+
+    private void showStudentsByDepartement() {
+    }
+
+    private void showGPA() {
+    }
+
+    private void viewStudentScoreDetail() {
+    }
+
+    private void showStudentSubjects() {
+    }
+
+    private void showListOfClass() {
     }
 
 }
