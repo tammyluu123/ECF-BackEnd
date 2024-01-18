@@ -1,9 +1,0 @@
-Professor = (register_Number, firstName, lastName, age, prof_principal , grade );
-Subject = (id_subj , subj_name , description, coefficient, during );
-schedule = (id_day_class , day_class , hour_class );
-Departement = (id_Dept , deptName, #register_Number);
-Class = (id_class, class_name , level , #id_Dept);
-Student = (id_student, firstName ,lastName , date_of_birth, email, #id_day_class, #id_class);
-Score = (id_score , comment , score , #id_subj, #id_student);
-enseigner = (#register_Number_, #id_subj);
-occuper_ = (#register_Number_, #id_class);
