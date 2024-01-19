@@ -119,7 +119,7 @@ public class IHMConsole {
 
             }
         }while(!choice.equals("0"));
-        //departementDAO.end();
+        classService.close();
     }
 
 
@@ -370,7 +370,7 @@ public class IHMConsole {
     }
 
     private void deletAllScoreByStudent() {
-        
+
     }
     private void showAllStudentByLevel() {
 
