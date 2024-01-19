@@ -6,4 +6,4 @@ select * from Student;
 select * from Class;
 select * from Score;
 select * from Subject;
-select * from Student;
+select * from Schedule;
