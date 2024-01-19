@@ -22,6 +22,12 @@ public class Schedule {
         this.hourClass = hourClass;
     }
 
+    public Schedule(String dayClass, String hourClass, Student student) {
+        this.dayClass = dayClass;
+        this.hourClass = hourClass;
+        this.student = student;
+    }
+
     public int getIdDayClass() {
         return idDayClass;
     }

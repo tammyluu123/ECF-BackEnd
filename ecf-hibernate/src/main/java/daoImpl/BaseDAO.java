@@ -18,4 +18,8 @@ public  abstract class BaseDAO {
         sessionFactory = new MetadataSources(registre).buildMetadata().buildSessionFactory();
 
     }
+
+    public void close() {
+        sessionFactory.close();
+    }
 }

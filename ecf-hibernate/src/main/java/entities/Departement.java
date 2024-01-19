@@ -14,8 +14,6 @@ public class Departement {
 
     private String deptName;
 
-
-
     @OneToMany(mappedBy = "departement")
     private Set<Professor> professor;
     @OneToMany(mappedBy = "departement")
@@ -24,6 +22,9 @@ public class Departement {
     public Departement() {
     }
 
+    public Departement(String deptName) {
+        this.deptName = deptName;
+    }
 
     public Departement(String deptName, Set<Professor> professor, List<ClassRoom> classes) {
         this.deptName = deptName;

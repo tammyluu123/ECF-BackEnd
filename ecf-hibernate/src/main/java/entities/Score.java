@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Score {
@@ -69,4 +71,7 @@ public class Score {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+
+
 }

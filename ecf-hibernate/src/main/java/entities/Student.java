@@ -3,20 +3,18 @@ package entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_student" )
     private int idStudent;
     @NotNull
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String email;
 
     @ManyToOne
@@ -25,7 +23,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "id_class")
-    private ClassRoom studentClass;
+    private ClassRoom classRooms;
     @OneToMany(mappedBy = "student")
     private List<Schedule> schedules = new ArrayList<>();
 
@@ -35,15 +33,23 @@ public class Student {
     public Student() {
     }
 
-    public Student(String firstName, String lastName, String dateOfBirth, String email, Schedule schedule, ClassRoom studentClass, List<Schedule> schedules, List<Score> scores) {
+    public Student(String firstName, String lastName, Date dateOfBirth, String email, Schedule schedule, ClassRoom classRooms, List<Schedule> schedules, List<Score> scores) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.schedule = schedule;
-        this.studentClass = studentClass;
+        this.classRooms = classRooms;
         this.schedules = schedules;
         this.scores = scores;
+    }
+
+    public Student(String firstName, String lastName, Date dateOfBirth, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+
     }
 
     public int getIdStudent() {
@@ -70,11 +76,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -94,12 +100,12 @@ public class Student {
         this.schedule = schedule;
     }
 
-    public ClassRoom getStudentClass() {
-        return studentClass;
+    public ClassRoom getClassRooms() {
+        return classRooms;
     }
 
-    public void setStudentClass(ClassRoom studentClass) {
-        this.studentClass = studentClass;
+    public void setClassRooms(ClassRoom classRooms) {
+        this.classRooms = classRooms;
     }
 
     public List<Schedule> getSchedules() {
@@ -108,5 +114,10 @@ public class Student {
 
     public List<Score> getScores() {
         return scores;
+    }
+
+    public boolean showProfile(){
+        System.out.printf("|%5d|%-15s|%-15s|%15s|%-30s|", idStudent,lastName,firstName,dateOfBirth, email);
+        return true;
     }
 }

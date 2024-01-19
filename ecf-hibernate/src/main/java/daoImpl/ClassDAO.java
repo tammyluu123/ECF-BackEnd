@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassDAO extends BaseDAO implements Repository <ClassRoom> {
+    public Session session;
+    public Transaction transaction;
 
     public ClassDAO() {super();
     }
@@ -17,8 +19,7 @@ public class ClassDAO extends BaseDAO implements Repository <ClassRoom> {
 
     @Override
     public boolean create(ClassRoom o) {
-        Session session = null;
-        Transaction transaction = null;
+
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
@@ -39,6 +40,23 @@ public class ClassDAO extends BaseDAO implements Repository <ClassRoom> {
 
     @Override
     public boolean delete(int id) {
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            ClassRoom classroom = session.get(ClassRoom.class,id);
+            if (classroom != null) {
+                session.delete(classroom);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+
+        }
         return false;
     }
 

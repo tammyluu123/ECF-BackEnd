@@ -1,8 +1,8 @@
 package daoImpl;
 
 import entities.Departement;
-import entities.Departement;
 import dao.Repository;
+import entities.Professor;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,7 +19,8 @@ public class DepartementDAO extends BaseDAO implements Repository<Departement> {
 
     @Override
     public boolean create(Departement o) {
-
+       /* session = null;
+        transaction = null;*/
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
@@ -63,6 +64,7 @@ public class DepartementDAO extends BaseDAO implements Repository<Departement> {
 
     @Override
     public Departement findById(int id) {
+        //session = null;
         try {
             session = sessionFactory.openSession();
             Departement department = session.get(Departement.class, id);
@@ -90,5 +92,46 @@ public class DepartementDAO extends BaseDAO implements Repository<Departement> {
         }
         return null;
     }
+
+    public boolean addProfessorByDept(Professor prof, int id){
+        boolean result = false;
+        Departement departement = this.findById(id);
+        session =sessionFactory.openSession();
+        session.getTransaction().begin();
+        if(departement != null) {
+            prof.setDepartement(departement);
+            session.save(prof);
+            result = true;
+        }
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+    public void end(){
+
+        //  session.close();
+        sessionFactory.close();
+    }
+    public void updateDepartement(Departement departement) {
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            // Use merge to update the departement
+            session.merge(departement);
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 
 }

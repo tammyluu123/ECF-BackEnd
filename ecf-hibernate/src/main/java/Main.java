@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        new IHMConsole().start();
+        IHMConsole ihmConsole = new IHMConsole();
+        ihmConsole.start();
     }
 }

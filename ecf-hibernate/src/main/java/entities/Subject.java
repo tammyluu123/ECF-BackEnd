@@ -29,6 +29,13 @@ public class Subject {
         this.scores = scores;
     }
 
+    public Subject(String subjName, String description, int coefficient, int during) {
+        this.subjName = subjName;
+        this.description = description;
+        this.coefficient = coefficient;
+        this.during = during;
+    }
+
     public int getIdSubj() {
         return idSubj;
     }
@@ -76,4 +83,18 @@ public class Subject {
     public void setScores(List<Score> scores) {
         this.scores = scores;
     }
+    public void addScore(Score score) {
+        if (scores == null) {
+            scores = new ArrayList<>();
+        }
+        scores.add(score);
+        score.setSubject(this);
+    }
+    public void removeScore(Score score) {
+        if (scores != null) {
+            scores.remove(score);
+            score.setSubject(null);
+        }
+    }
+
 }

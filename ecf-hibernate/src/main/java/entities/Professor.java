@@ -2,23 +2,33 @@ package entities;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String registerNumber;
+    @Column(name = "register_Number")
+    private int registerNumber;
     @NotNull
     private String firstName;
     private String lastName;
     private int age;
     private boolean profPrincipal;
     private int grade;
+    @ManyToMany
+    @JoinTable(
+            name = "professor_classroom",
+            joinColumns = @JoinColumn(name = "register_Number"),
+            inverseJoinColumns = @JoinColumn(name = "id_class")
+    )
+    private Set<ClassRoom> classRooms;
 
+    @ManyToOne(cascade =CascadeType.ALL)
+    @JoinColumn(name = "id_department")
+    private Departement departement;
     public Professor() {
     }
 
@@ -30,11 +40,14 @@ public class Professor {
         this.grade = grade;
     }
 
-    public String getRegisterNumber() {
+    public Professor(String lastName, String firstName, int age, boolean isPrincipal, int grade, Departement departement) {
+    }
+
+    public int getRegisterNumber() {
         return registerNumber;
     }
 
-    public void setRegisterNumber(String registerNumber) {
+    public void setRegisterNumber(int registerNumber) {
         this.registerNumber = registerNumber;
     }
 
@@ -76,5 +89,21 @@ public class Professor {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
+    public Set<ClassRoom> getClassRooms() {
+        return classRooms;
+    }
+
+    public void setClassRooms(Set<ClassRoom> classRooms) {
+        this.classRooms = classRooms;
     }
 }

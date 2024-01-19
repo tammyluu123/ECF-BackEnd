@@ -14,6 +14,10 @@ import java.util.List;
 public class ScheduleDAO  extends BaseDAO implements Repository<Schedule> {
     public Session session;
     public Transaction transaction;
+
+    public ScheduleDAO() {super();
+    }
+
     @Override
     public boolean create(Schedule o) {
         try {

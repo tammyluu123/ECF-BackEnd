@@ -1,8 +1,6 @@
 package daoImpl;
 
 import dao.Repository;
-import entities.ClassRoom;
-import entities.Departement;
 import entities.Professor;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -61,10 +59,14 @@ public class ProfessorDAO extends BaseDAO implements Repository<Professor> {
     @Override
     public Professor findById(int id) {
 
+        return null;
+    }
+
+    public  Professor findByRegisterNumber (int registerNum){
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            Professor professor = session.get(Professor.class, id);
+            Professor professor = session.get(Professor.class, registerNum);
             return professor;
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +75,6 @@ public class ProfessorDAO extends BaseDAO implements Repository<Professor> {
         }
         return null;
     }
-
     @Override
     public List<Professor> findAll() {
         try{
@@ -87,5 +88,23 @@ public class ProfessorDAO extends BaseDAO implements Repository<Professor> {
             e.printStackTrace();
         }
         return null;
+    }
+    public boolean update(Professor professor) {
+        transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(professor);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return false;
     }
 }

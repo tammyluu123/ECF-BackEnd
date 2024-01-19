@@ -1,9 +1,7 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,20 +16,20 @@ public class ClassRoom {
     private String level;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Dept")
-    private Departement department;
-    @OneToMany (mappedBy = "class")
+    @JoinColumn(name = "id_department")
+    private Departement departement;
+    @OneToMany (mappedBy = "classRooms")
     private Set<Student> studentList = new HashSet<>();
-    @ManyToMany(mappedBy = "class", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "classRooms", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Professor> professors = new HashSet<>();
 
     public ClassRoom() {
     }
 
-    public ClassRoom(String className, String level, Departement department, Set<Student> studentList, Set<Professor> professors) {
+    public ClassRoom(String className, String level, Departement departement, Set<Student> studentList, Set<Professor> professors) {
         this.className = className;
         this.level = level;
-        this.department = department;
+        this.departement = departement;
         this.studentList = studentList;
         this.professors = professors;
     }
@@ -60,12 +58,12 @@ public class ClassRoom {
         this.level = level;
     }
 
-    public Departement getDepartment() {
-        return department;
+    public Departement getDepartment(Departement departement) {
+        return this.departement;
     }
 
     public void setDepartment(Departement department) {
-        this.department = department;
+        this.departement = department;
     }
 
     public Set<Student> getStudentList() {
@@ -83,4 +81,8 @@ public class ClassRoom {
     public void setProfessors(Set<Professor> professors) {
         this.professors = professors;
     }
+
+
+
+
 }
